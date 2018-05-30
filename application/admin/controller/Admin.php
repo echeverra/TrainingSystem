@@ -13,4 +13,9 @@ class Admin extends Base
     {
         return $this->fetch('add');
     }
+
+    public function edit()
+    {
+        return $this->fetch('edit');
+    }
 }
