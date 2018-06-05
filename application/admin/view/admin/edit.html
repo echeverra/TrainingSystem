@@ -279,9 +279,9 @@ style.firebugResetStyles {
                         <a href="#">系统</a>
                     </li>
                                         <li>
-                        <a href="#">权限列表</a>
+                        <a href="{:url('admin/adminList')}">管理员列表</a>
                     </li>
-                                        <li class="active">编辑权限</li>
+                                        <li class="active">编辑管理员</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -293,72 +293,27 @@ style.firebugResetStyles {
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
-                <span class="widget-caption">新增规则</span>
+                <span class="widget-caption">编辑管理员</span>
             </div>
             <div class="widget-body">
                 <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="" method="post">
+                        <input name="id" value="{$admin['id']}" type="hidden">
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label no-padding-right">规则类型</label>
+                            <label for="name" class="col-sm-2 control-label no-padding-right">用户名</label>
                             <div class="col-sm-6">
-                                <select name="type" style="width: 100%;">
-                                    <option value="1" selected="selected">按节点</option>
-                                    <option value="2">其他</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label no-padding-right">名称</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="title" placeholder="" name="title" value="文档" required="" type="text">
+                                <input class="form-control" id="username" placeholder="" name="username" value="{$admin['username']}" required="" type="text">
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
                         </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label no-padding-right">密码</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="password" placeholder="" name="password" value="" type="text">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 不填密码则密码保持不变</p>
+                        </div>
 
-                        <div class="form-group">
-                            <label for="pid" class="col-sm-2 control-label no-padding-right">上级菜单</label>
-                            <div class="col-sm-6">
-                                <select name="pid" style="width: 100%;">
-                                    <option selected="selected" value="0">一级菜单</option>
-                                                                        <option value="1">控制面板</option>
-                                                                        <option value="19">文档</option>
-                                                                        <option value="20">——文章列表</option>
-                                                                        <option value="2">系统</option>
-                                                                        <option value="13">——用户管理</option>
-                                                                        <option value="3">——角色管理</option>
-                                                                        <option value="4">——权限列表</option>
-                                                                    </select>
-                            </div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label no-padding-right">节点/规则标识</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="name" placeholder="" name="name" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="condition" class="col-sm-2 control-label no-padding-right">附加条件</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="condition" placeholder="" name="condition" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="sort" class="col-sm-2 control-label no-padding-right">排序</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="sort" placeholder="" name="sort" value="2" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="is_show" class="col-sm-2 control-label no-padding-right">是否显示</label>
-
-                            <div class="col-xs-4">
-                                <label>
-                                    <input class="checkbox-slider slider-icon yesno" name="is_show" checked="checked" type="checkbox">
-                                    <span class="text"></span>
-                                </label>
-                            </div>                            
-                        </div>
-                        <input name="id" value="19" type="hidden">
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default">保存信息</button>
