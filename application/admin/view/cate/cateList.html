@@ -1,0 +1,73 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li class="active">栏目列表</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <button type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon"
+                onClick="javascript:window.location.href = '{:url(\'cate/add\')}'"><i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                <tr>
+                                    <th class="text-center" style="width: 10%">ID</th>
+                                    <th class="text-center" style="width: 30%">栏目名称</th>
+                                    <th class="text-center" style="width: 20%">栏目类型</th>
+                                    <th class="text-center" style="width: 20%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="cates" id="cate"}
+                                <tr>
+                                    <td align="center">{$cate.id}</td>
+                                    <td align="left">{if condition="$cate['level'] neq 0"}|{/if}<?php echo str_repeat('---', $cate['level']) ?>{$cate.catename}</td>
+                                    <td align="center">
+                                        {if condition="$cate['type'] eq 1"}
+                                        列表
+                                        {else}
+                                        单页
+                                        {/if}
+                                    </td>
+                                    <td align="center">
+                                        <a href="{:url('cate/edit', array('id'=>$cate['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除该栏目吗', '{:url(\'cate/del\', array(\'id\'=>$cate[\'id\']))}')"
+                                           class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+{include file='common/footer'}
