@@ -9,17 +9,18 @@ class Cate extends Base
         'delSonCate' => ['only'=>"del"]
     ];
 
-    public function second() {
-        echo 'second';die;
-    }
-
-    public function hello() {
-        echo 'hello';die;
-    }
-
     public function cateList()
     {
         $cate = new CateModel();
+
+        if(request()->isPost()) {
+            $sorts = input('post.');
+            foreach ($sorts as $k=>$v) {
+                $cate->update(['id'=>$k, 'sort'=>$v]);
+            }
+            $this->success('排序成功');
+        }
+
         $cates = $cate->getCateTree();
         $this->assign("cates", $cates);
         return $this->fetch('cateList');
