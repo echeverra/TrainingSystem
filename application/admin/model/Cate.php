@@ -15,7 +15,7 @@ class Cate extends Model
 
 
     public function getCate() {
-        $res = db('cate')->field('id, catename, type, pid')->select();
+        $res = db('cate')->select();
         return $res;
     }
 
@@ -25,7 +25,7 @@ class Cate extends Model
     }
 
     public function getCateTree() {
-        $cates = db('cate')->field('id, catename, type, pid')->select();
+        $cates = db('cate')->order('sort')->select();
         return $this->sort($cates);
     }
 
@@ -48,7 +48,7 @@ class Cate extends Model
     }
 
     public function getChildrenId($cateid) {
-        $cateres = db('cate')->field('id, catename, type, pid')->select();
+        $cateres = db('cate')->select();
         return $this->_getChildrenId($cateres, $cateid);
 
     }
