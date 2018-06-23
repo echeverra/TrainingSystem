@@ -1,0 +1,82 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li class="active">文章管理</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <button type="button" tooltip="添加文章" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url("article/add")}'"> <i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                <tr>
+                                    <th class="text-center" width="3%">ID</th>
+                                    <th class="text-center" width="5%">文章标题</th>
+                                    <th class="text-center" width="5%">关键字</th>
+                                    <th class="text-center" width="5%">描述缩略图</th>
+                                    <th class="text-center" width="20%">文章内容</th>
+                                    <th class="text-center" width="10%">类别</th>
+                                    <th class="text-center" width="5%">文章发布时间</th>
+                                    <th class="text-center" width="5%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="articles" id="article"}
+                                <tr>
+                                    <td align="center">{$article.id}</td>
+                                    <td align="center"><?= mb_substr($article['title'], 0, 6, 'utf-8'); if(strlen($article['title'])>6) {echo '...';}; ?></td>
+                                    <td align="center">{$article.keywords}</td>
+                                    <td align="center">
+                                        {if condition="$article.thumb eq ''"}
+                                        无缩略图
+                                        {else}
+                                        <img src="__SITE_URL__{$article.thumb}" alt="" style="height: 30px">
+                                        {/if}
+                                    </td>
+                                    <td align="center"><?= mb_substr($article['content'], 0, 20, 'utf-8'); if(strlen($article['content'])>20) {echo '...';}; ?></td>
+                                    <td align="center">{$article.catename}</td>
+                                    <td align="center"><?= date('Y-m-d H:m:s', $article['time']) ?></td>
+                                    <td align="center">
+                                        <a href="{:url('article/edit', array('id'=>$article['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除吗', '{:url(\'article/del\', array(\'id\'=>$article[\'id\']))}')" class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top: 10px; text-align: right">
+                            {$articles->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+{include file='common/footer'}

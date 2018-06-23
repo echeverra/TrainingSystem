@@ -1,0 +1,125 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li>
+                <a href="{:url('article/articleList')}">文章管理</a>
+            </li>
+            <li class="active">修改文章</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">修改文章</span>
+                    </div>
+                    <div class="widget-body">
+                        <div id="horizontal-form">
+                            <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="id" value="{$article.id}">
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label no-padding-right">文章标题</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="title" placeholder="" name="title" type="text" value="{$article.title}">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label no-padding-right">文章作者</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="author" placeholder="" name="author" type="text" value="{$article.author}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="keywords" class="col-sm-2 control-label no-padding-right">文章关键字</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="keywords" placeholder="" name="keywords" type="text" value="{$article.keywords}">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="desc" class="col-sm-2 control-label no-padding-right">文章描述</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" style="resize: none" id="desc" placeholder="" name="desc" type="text">{$article.desc}</textarea>
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="thumb" class="col-sm-2 control-label no-padding-right">文章缩略图</label>
+                                    <div class="col-sm-6">
+                                        <input class=""  id="thumb" placeholder="" name="thumb" type="file">
+                                        {if condition="$article.thumb neq ''"}
+                                        <img src="__SITE_URL__{$article.thumb}" style="height: 40px">
+                                        {else}
+                                        暂无缩略图
+                                        {/if}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cateid" class="col-sm-2 control-label no-padding-right">文章栏目</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="cateid" placeholder="" name="cateid" type="file">
+                                            {volist name="cates" id="cate"}
+                                            <option {if condition="$article.cateid eq $cate['id']"}selected{/if} value="{$cate['id']}">{if condition="$cate['level'] neq 0"}|{/if}<?php echo str_repeat('---', $cate['level']) ?>{$cate['catename']}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content" class="col-sm-2 control-label no-padding-right">文章内容</label>
+                                    <div class="col-sm-6">
+                                        <textarea style="resize: none;height: 100px" id="content" placeholder="" name="content" type="text">{$article.content}</textarea>
+                                    </div>
+                                    <p class="help-block col-sm-2 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">保存信息</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+
+<script src="__ADMIN__/UEditor/ueditor.config.js"></script>
+<script src="__ADMIN__/UEditor/ueditor.all.min.js"></script>
+<script src="__ADMIN__/UEditor/ueditor.parse.min.js"></script>
+
+<script>
+
+    var ue = UE.getEditor('content');
+
+</script>
+
+{include file='common/footer'}
