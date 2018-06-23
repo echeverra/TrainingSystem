@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="__ADMIN__/style/jquery.js"></script>
+    <script src="__ADMIN__/style/jquery_002.js"></script>
     <!--Basic Styles-->
-    <link href="__PUBLIC__style/bootstrap.css" rel="stylesheet">
-    <link href="__PUBLIC__style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
     <!--Beyond styles-->
-    <link id="beyond-link" href="__PUBLIC__style/beyond.css" rel="stylesheet">
-    <link href="__PUBLIC__style/demo.css" rel="stylesheet">
-    <link href="__PUBLIC__style/animate.css" rel="stylesheet">
+    <link id="beyond-link" href="__ADMIN__style/beyond.css" rel="stylesheet">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
 </head>
 <!--Head Ends-->
 <!--Body-->
@@ -28,21 +30,23 @@
                 <div class="loginbox-textbox">
                     <input class="form-control" placeholder="password" name="password" type="password">
                 </div>
-                <div class="loginbox-submit">
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="" name="code" type="text" style="width: 80px;float: left">
+                    <img src="{:captcha_src()}" alt="" onclick="src='{:captcha_src()}?'+Math.random()" style="cursor:pointer;width: 130px;float: left;margin-left: 10px;height: 34px">
+                </div>
+                <div class="loginbox-submit" style="margin-top: 30px">
                     <input class="btn btn-primary btn-block" value="Login" type="submit">
                 </div>
             </div>
-                <div class="logobox">
-                    <!--<p class="text-center"></p>-->
-                </div>
+                <!--<div class="logobox">-->
+                    <!--&lt;!&ndash;<p class="text-center"></p>&ndash;&gt;-->
+                <!--</div>-->
         </form>
     </div>
     <!--Basic Scripts-->
-    <script src="__PUBLIC__style/jquery.js"></script>
-    <script src="__PUBLIC__style/bootstrap.js"></script>
-    <script src="__PUBLIC__style/jquery_002.js"></script>
+    <script src="__ADMIN__/style/bootstrap.js"></script>
     <!--Beyond Scripts-->
-    <script src="__PUBLIC__style/beyond.js"></script>
+    <script src="__ADMIN__/style/beyond.js"></script>
 
 
 
