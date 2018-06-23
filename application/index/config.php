@@ -11,8 +11,8 @@
 
 return [
     'view_replace_str'  =>  [
-        '__PUBLIC__'=>'/public/static/index/',
-        '__STATIC__'=>'/public/static/',
+        '__INDEX__'=>'/static/index/',
+        '__STATIC__'=>'/static/',
         '__LOCALHOST__'=>'http://127.0.0.1',
     ]
 ];
