@@ -8,15 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!--Basic Styles-->
-    <link href="__PUBLIC__/style/bootstrap.css" rel="stylesheet">
-    <link href="__PUBLIC__/style/font-awesome.css" rel="stylesheet">
-    <link href="__PUBLIC__/style/weather-icons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
 
     <!--Beyond styles-->
-    <link id="beyond-link" href="__PUBLIC__/style/beyond.css" rel="stylesheet" type="text/css">
-    <link href="__PUBLIC__/style/demo.css" rel="stylesheet">
-    <link href="__PUBLIC__/style/typicons.css" rel="stylesheet">
-    <link href="__PUBLIC__/style/animate.css" rel="stylesheet">
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
 
 </head>
 <body>
@@ -48,19 +48,19 @@
                                     <!--<img src="images/adam-jansen.jpg">-->
                                 </div>
                                 <section>
-                                    <h2><span class="profile"><span>admin</span></span></h2>
+                                    <h2><span class="profile"><span>{$Request.session.username}</span></span></h2>
                                 </section>
                             </a>
                             <!--Login Area Dropdown-->
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/logout.html">
+                                    <a href="{:url('admin/logout')}">
                                         退出登录
                                     </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/changePwd.html">
+                                    <a href="{:url('admin/edit', array('id'=>$Request.session.id))}">
                                         修改密码
                                     </a>
                                 </li>

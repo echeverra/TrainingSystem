@@ -22,9 +22,27 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{:url("admin/adminList")}">
+                            <a href="{:url(\'admin/adminList\')}">
                                     <span class="menu-text">
-                                        管理列表
+                                        管理员列表
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-folder"></i>
+                        <span class="menu-text">栏目</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="{:url('cate/cateList')}">
+                                    <span class="menu-text">
+                                        栏目管理
                                     </span>
                                 <i class="menu-expand"></i>
                             </a>
@@ -40,9 +58,10 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="/admin/document/index.html">
+                            <a href="{:url('article/articleList')}">
                                     <span class="menu-text">
-                                        文章列表                                    </span>
+                                        文章管理
+                                    </span>
                                 <i class="menu-expand"></i>
                             </a>
                         </li>
@@ -59,13 +78,13 @@
                         <li>
                             <a href="/admin/document/index.html">
                                     <span class="menu-text">
-                                        配置                                   </span>
+                                        配置
+                                    </span>
                                 <i class="menu-expand"></i>
                             </a>
                         </li>
                     </ul>
                 </li>
-
 
 
             </ul>
