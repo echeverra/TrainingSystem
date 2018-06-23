@@ -236,4 +236,12 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //验证码配置
+    'captcha'  => [
+        // 字体大小
+        'fontSize' => 20,
+        // 验证码长度（位数）
+        'length'   => 4,
+    ],
 ];
