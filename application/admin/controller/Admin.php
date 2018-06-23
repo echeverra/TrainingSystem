@@ -32,29 +32,42 @@ class Admin extends Base
     {
         $admin = new AdminModel();
         $id = input('id');
-        $res = $admin->getAdminById($id); //查询不到NULL
+        $adminRes = $admin->getAdminById($id); //查询不到NULL
+        if (!$adminRes) {
+            $this->error('无法查询到该管理员', url('admin/adminList'));
+        }
+
         if(request()->isPost()) {  //提交修改表单
             $data = input('post.');
-            if(!$data['username']) {
-                $this->error('管理员用户名不为空', 'admin/edit');
-            }
-            if(!$data['password']) {
-                $data['password'] = $res['password']; //没填写密码，取原密码
+            $res = $admin->updateAdminById($data, $adminRes);
+
+            if($res == -1) {
+                $this->error('管理员用户名不能为空');
+            }else if($res || $res==0) {  //等于0为没修改，影响0条
+               $this->success('修改管理员成功', url('admin/adminList'));
             }else {
-                $data['password'] = md5($data['password']);
-            }
-            $id = $data['id'];
-            $res = $admin->updateAdminById($id, $data);
-            if($res || $res==0) {  //等于0为没修改，影响0条
-               $this->success('修改管理员成功', 'admin/adminList');
-            }else {
-                $this->error('修改管理员失败', 'admin/edit');
+                $this->error('修改管理员失败');
             }
         }
-        if (!$res) {
-            $this->error('无法查询到该管理员', 'admin/adminList');
-        }
-        $this->assign('admin', $res);
+
+        $this->assign('admin', $adminRes);
         return $this->fetch('edit');
+    }
+
+    public function del() {
+        $id = input('id');
+        $admin = new AdminModel();
+        $res = $admin->deleteAdminById($id);
+        if($res) {
+            $this->success('删除管理员成功', url('admin/adminList'));
+        }else {
+            $this->error('删除管理员失败');
+        }
+    }
+
+
+    public function logout() {
+        session(null);
+        $this->success('退出系统成功', url('login/login'));
     }
 }
