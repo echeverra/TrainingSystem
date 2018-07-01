@@ -1,15 +1,17 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Admin as AdminModel;
+use think\Loader;
 
 class Admin extends Base
 {
-    public function adminList()
+    public function lis()
     {
+        $row = 10;
         $admin = new AdminModel();
-        $adminRes = $admin->getAdmin();
+        $adminRes = $admin->paginate($row);
         $this->assign("adminRes", $adminRes);
-        return $this->fetch('adminList');
+        return $this->fetch('lis');
     }
 
     public function add()
@@ -17,10 +19,17 @@ class Admin extends Base
         if(request()->isPost()) {
             $data = input('post.');
             $admin = new AdminModel();
-            $res = $admin->addAdmin($data);
 
+            $validate = Loader::validate('Admin');
+            if(!$validate->scene('add')->check($data)){
+                $this->error($validate->getError());
+            }
+
+            $data['password'] = md5($data['password']);
+
+            $res = $admin->save($data);
             if($res) {
-                $this->success('添加管理员成功！', 'adminList');
+                $this->success('添加管理员成功！', 'lis');
             }else {
                 $this->error('添加管理员失败！');
             }
@@ -32,19 +41,28 @@ class Admin extends Base
     {
         $admin = new AdminModel();
         $id = input('id');
-        $adminRes = $admin->getAdminById($id); //查询不到NULL
+        $adminRes = $admin->find($id); //查询不到NULL
         if (!$adminRes) {
-            $this->error('无法查询到该管理员', url('admin/adminList'));
+            $this->error('无法查询到该管理员', url('admin/lis'));
         }
 
         if(request()->isPost()) {  //提交修改表单
             $data = input('post.');
-            $res = $admin->updateAdminById($data, $adminRes);
 
-            if($res == -1) {
-                $this->error('管理员用户名不能为空');
-            }else if($res || $res==0) {  //等于0为没修改，影响0条
-               $this->success('修改管理员成功', url('admin/adminList'));
+            $validate = Loader::validate('Admin');
+            if(!$validate->scene('edit')->check($data)){
+                $this->error($validate->getError());
+            }
+
+            if(!$data['password']) {
+                $data['password'] = $adminRes['password']; //没填写密码，取原密码
+            }else {
+                $data['password'] = md5($data['password']);
+            }
+
+            $res = $admin->update($data);
+            if($res || $res==0) {  //等于0为没修改，影响0条
+               $this->success('修改管理员成功', url('admin/lis'));
             }else {
                 $this->error('修改管理员失败');
             }
@@ -57,9 +75,9 @@ class Admin extends Base
     public function del() {
         $id = input('id');
         $admin = new AdminModel();
-        $res = $admin->deleteAdminById($id);
+        $res = $admin->where(['id'=>$id])->delete();
         if($res) {
-            $this->success('删除管理员成功', url('admin/adminList'));
+            $this->success('删除管理员成功', url('admin/lis'));
         }else {
             $this->error('删除管理员失败');
         }

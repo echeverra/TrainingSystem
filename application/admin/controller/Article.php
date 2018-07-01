@@ -2,18 +2,19 @@
 namespace app\admin\controller;
 use app\admin\model\Article as ArticleModel;
 use app\admin\model\Cate as CateModel;
+use think\Loader;
 
 class Article extends Base
 {
 
-    public function articleList() {
+    public function lis() {
         $row = 10;
         $article = new ArticleModel();
         //联表查询
         $articles = db('article')->alias('a')->join('cate b', 'a.cateid = b.id')->field('a.*, b.catename')->paginate($row);
 //        $articles = $article->getArticles();
         $this->assign('articles', $articles);
-        return $this->fetch('articleList');
+        return $this->fetch('lis');
     }
 
     public function add() {
@@ -28,8 +29,12 @@ class Article extends Base
                 'time' => time(),
             ];
             $article = new ArticleModel();
+            $validate = Loader::validate('Article');
+            if(!$validate->scene('add')->check($data)){
+                $this->error($validate->getError());
+            }
             if($article->save($data)) {
-                $this->success('添加文章成功', url('articleList'));
+                $this->success('添加文章成功', url('lis'));
             }else {
                 $this->error('添加文章失败');
             }
@@ -54,8 +59,12 @@ class Article extends Base
                 'time' => time(),
             ];
             $article = new ArticleModel();
+            $validate = Loader::validate('Article');
+            if(!$validate->scene('edit')->check($data)){
+                $this->error($validate->getError());
+            }
             if($article->update($data)) {
-                $this->success('修改文章成功', url('articleList'));
+                $this->success('修改文章成功', url('lis'));
             }else {
                 $this->error('修改文章失败');
             }
@@ -76,7 +85,7 @@ class Article extends Base
         $id = input('id');
         $article = new ArticleModel();
         if($article->destroy($id)) {
-            $this->success('删除文章成功', url('articleList'));
+            $this->success('删除文章成功', url('lis'));
         }else {
             $this->error('删除文章失败');
         }
