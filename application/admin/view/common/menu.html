@@ -22,7 +22,7 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{:url(\'admin/adminList\')}">
+                            <a href="{:url(\'admin/lis\')}">
                                     <span class="menu-text">
                                         管理员列表
                                     </span>
@@ -35,14 +35,14 @@
                 <li>
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-folder"></i>
-                        <span class="menu-text">栏目</span>
+                        <span class="menu-text">栏目管理</span>
                         <i class="menu-expand"></i>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{:url('cate/cateList')}">
+                            <a href="{:url('cate/lis')}">
                                     <span class="menu-text">
-                                        栏目管理
+                                        栏目列表
                                     </span>
                                 <i class="menu-expand"></i>
                             </a>
@@ -53,14 +53,32 @@
                 <li>
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-file-text"></i>
-                        <span class="menu-text">文档</span>
+                        <span class="menu-text">文章管理</span>
                         <i class="menu-expand"></i>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{:url('article/articleList')}">
+                            <a href="{:url('article/lis')}">
                                     <span class="menu-text">
-                                        文章管理
+                                        文章列表
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-chain"></i>
+                        <span class="menu-text">友情链接</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="{:url('link/lis')}">
+                                    <span class="menu-text">
+                                        链接管理
                                     </span>
                                 <i class="menu-expand"></i>
                             </a>
@@ -76,9 +94,17 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="/admin/document/index.html">
+                            <a href="{:url('conf/conf')}">
                                     <span class="menu-text">
-                                        配置
+                                        配置项
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:url('conf/lis')}">
+                                    <span class="menu-text">
+                                        配置列表
                                     </span>
                                 <i class="menu-expand"></i>
                             </a>

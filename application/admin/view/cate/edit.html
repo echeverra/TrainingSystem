@@ -11,7 +11,7 @@
                 <a href="#">系统</a>
             </li>
             <li>
-                <a href="{:url('cate/cateList')}">栏目列表</a>
+                <a href="{:url('cate/lis')}">栏目列表</a>
             </li>
             <li class="active">编辑栏目</li>
         </ul>
@@ -30,7 +30,7 @@
                     <div class="widget-body">
                         <div id="horizontal-form">
                             <form class="form-horizontal" role="form" action="" method="post">
-                                <!--<input type="hidden" name="id" value="$cate.id">-->
+                                <input type="hidden" name="id" value="{$cate.id}">
                                 <div class="form-group">
                                     <label for="pid" class="col-sm-2 control-label no-padding-right">上级栏目</label>
                                     <div class="col-sm-6">
@@ -49,8 +49,7 @@
                                 <div class="form-group">
                                     <label for="catename" class="col-sm-2 control-label no-padding-right">栏目名称</label>
                                     <div class="col-sm-6">
-                                        <input class="form-control" id="catename" placeholder="" name="catename"
-                                               required="" type="text" value="{$cate.catename}">
+                                        <input class="form-control" id="catename" placeholder="" name="catename" required="required" type="text" value="{$cate.catename}" maxlength="30">
                                     </div>
                                     <p class="help-block col-sm-4 red">* 必填</p>
                                 </div>
@@ -59,8 +58,9 @@
                                     <label for="" class="col-sm-2 control-label no-padding-right">栏目类型</label>
                                     <div class="col-sm-6">
                                         <div class="control-group">
-                                            <div class="radio" style="float: left;margin-right: 10px"><label><input {if condition="$cate.type eq 1"}checked="checked"{/if} name="type" value="1" type="radio"><span class="text">列表</span></label></div>
-                                            <div class="radio" style="float: left;"><label><input {if condition="$cate.type eq 2"}checked="checked"{/if} name="type" type="radio" value="2"><span class="text">单页</span></label></div>
+                                            <div class="radio" style="float: left;margin-right: 10px"><label><input {if condition="$cate.type eq 1"}checked="checked"{/if} name="type" value="1" type="radio"><span class="text">文章列表</span></label></div>
+                                            <div class="radio" style="float: left;margin-right: 10px"><label><input {if condition="$cate.type eq 2"}checked="checked"{/if} name="type" type="radio" value="2"><span class="text">单页</span></label></div>
+                                            <div class="radio" style="float: left;"><label><input {if condition="$cate.type eq 3"}checked="checked"{/if} name="type" type="radio" value="3"><span class="text">图片列表</span></label></div>
                                         </div>
                                     </div>
                                     <p class="help-block col-sm-4 red">* 必填</p>

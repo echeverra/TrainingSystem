@@ -1,0 +1,87 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li>
+                <a href="{:url('conf/lis')}">配置列表</a>
+            </li>
+            <li class="active">添加配置</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">新增配置</span>
+                    </div>
+                    <div class="widget-body">
+                        <div id="horizontal-form">
+                            <form class="form-horizontal" role="form" action="" method="post">
+
+                                <div class="form-group">
+                                    <label for="cnname" class="col-sm-2 control-label no-padding-right">中文名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="cnname" placeholder="" name="cnname" required="required" type="text" maxlength="30">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="enname" class="col-sm-2 control-label no-padding-right">英文名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="enname" placeholder="" name="enname" required="required" type="text" maxlength="30">
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type" class="col-sm-2 control-label no-padding-right">配置类型</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="type" id="type">
+                                            {foreach $type as $k=>$v}
+                                            <option value="{$k}">{$v}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="values" class="col-sm-2 control-label no-padding-right">可选值</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" id="values" placeholder="" name="values" maxlength="100"></textarea>
+                                    </div>
+                                    <p class="help-block col-sm-4 red">* 单选/复选/下拉类型需填写，并用 , 分隔</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">保存信息</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+{include file='common/footer'}

@@ -1,0 +1,78 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li class="active">配置列表</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <button type="button" tooltip="添加配置" class="btn btn-sm btn-azure btn-addon"
+                onClick="javascript:window.location.href = '{:url(\'conf/add\')}'"><i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <form action="" method="post">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                <tr>
+                                    <th class="text-center" style="width: 5%">ID</th>
+                                    <th class="text-center" style="width: 5%">排序</th>
+                                    <th class="text-center" style="width: 10%">中文名称</th>
+                                    <th class="text-center" style="width: 10%">英文名称</th>
+                                    <th class="text-center" style="width: 10%">类型</th>
+                                    <th class="text-center" style="width: 10%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="confs" id="conf"}
+                                <tr>
+                                    <td align="center">{$conf.id}</td>
+                                    <td align="center"><input style="width: 50px; text-align: center" type="text" name="{$conf.id}" value="{$conf.sort}" required="required" maxlength="3"></td>
+                                    <td align="center"><?= mb_substr($conf['cnname'], 0, 8, 'utf-8'); if(mb_strlen($conf['cnname'], 'utf-8')>8) {echo '...';};?></td>
+                                    <td align="center"><?= mb_substr($conf['enname'], 0, 16, 'utf-8'); if(mb_strlen($conf['enname'], 'utf-8')>16) {echo '...';};?></td>
+                                    <td align="center">{$type[$conf['type']]}</td>
+                                    <td align="center">
+                                        <a href="{:url('conf/edit', array('id'=>$conf['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除该配置吗', '{:url(\'conf/del\', array(\'id\'=>$conf[\'id\']))}')"
+                                           class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                            <div style="margin-top: 10px;float: left"><input type="submit" class="btn btn-primary" value="排序"></div>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <div style="margin-top: 10px; text-align: right">
+                            {$confs->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+{include file='common/footer'}

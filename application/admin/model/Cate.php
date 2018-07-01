@@ -6,13 +6,6 @@ use think\Model;
 class Cate extends Model
 {
 
-    public function addCate($data) {
-
-        if(!is_array($data) || $data['pid'] == '' || trim($data['catename']) == '' || $data['type'] == '') return false;
-        $res = db('cate')->insert($data);
-        return $res;
-    }
-
 
     public function getCate() {
         $res = db('cate')->select();
@@ -42,10 +35,6 @@ class Cate extends Model
         return $arr;
     }
 
-    public function deletecateById($id) {
-        $res = db('cate')->where('id', $id)->delete();
-        return $res;
-    }
 
     public function getChildrenId($cateid) {
         $cateres = db('cate')->select();
@@ -64,11 +53,4 @@ class Cate extends Model
         return $arr;
     }
 
-    public function updateCateById($data, $id) {
-        if(!$data['catename']) {
-            return 1;//栏目名为空
-        }
-        $res = db('cate')->where('id', $id)->update($data);
-        return $res;
-    }
 }

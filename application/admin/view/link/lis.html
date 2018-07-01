@@ -9,7 +9,7 @@
             <li>
                 <a href="#">系统</a>
             </li>
-            <li class="active">栏目列表</li>
+            <li class="active">链接列表</li>
         </ul>
     </div>
     <!-- /Page Breadcrumb -->
@@ -17,8 +17,8 @@
     <!-- Page Body -->
     <div class="page-body">
 
-        <button type="button" tooltip="添加栏目" class="btn btn-sm btn-azure btn-addon"
-                onClick="javascript:window.location.href = '{:url(\'cate/add\')}'"><i class="fa fa-plus"></i> Add
+        <button type="button" tooltip="添加链接" class="btn btn-sm btn-azure btn-addon"
+                onClick="javascript:window.location.href = '{:url(\'link/add\')}'"><i class="fa fa-plus"></i> Add
         </button>
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -31,29 +31,25 @@
                                 <tr>
                                     <th class="text-center" style="width: 10%">ID</th>
                                     <th class="text-center" style="width: 10%">排序</th>
-                                    <th class="text-center" style="width: 30%">栏目名称</th>
-                                    <th class="text-center" style="width: 20%">栏目类型</th>
+                                    <th class="text-center" style="width: 20%">链接名称</th>
+                                    <th class="text-center" style="width: 20%">链接描述</th>
+                                    <th class="text-center" style="width: 20%">链接</th>
                                     <th class="text-center" style="width: 20%">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {volist name="cates" id="cate"}
+                                {volist name="links" id="link"}
                                 <tr>
-                                    <td align="center">{$cate.id}</td>
-                                    <td align="center"><input style="width: 50px; text-align: center" type="text" name="{$cate.id}" value="{$cate.sort}"></td>
-                                    <td align="left">{if condition="$cate['level'] neq 0"}|{/if}<?php echo str_repeat('---', $cate['level']) ?>{$cate.catename}</td>
+                                    <td align="center">{$link.id}</td>
+                                    <td align="center"><input style="width: 50px; text-align: center" type="text" name="{$link.id}" value="{$link.sort}" required="required" maxlength="3"></td>
+                                    <td align="left"><?= mb_substr($link['title'], 0, 8, 'utf-8'); if(mb_strlen($link['title'], 'utf-8')>8) {echo '...';};?></td>
+                                    <td align="left"><?= mb_substr($link['desc'], 0, 8, 'utf-8'); if(mb_strlen($link['desc'], 'utf-8')>8) {echo '...';};?></td>
+                                    <td align="left"><a href="{$link.url}" target="_blank"><?= mb_substr($link['url'], 0, 30, 'utf-8'); if(mb_strlen($link['url'], 'utf-8')>30) {echo '...';};?></a></td>
                                     <td align="center">
-                                        {if condition="$cate['type'] eq 1"}
-                                        列表
-                                        {else}
-                                        单页
-                                        {/if}
-                                    </td>
-                                    <td align="center">
-                                        <a href="{:url('cate/edit', array('id'=>$cate['id']))}" class="btn btn-primary btn-sm shiny">
+                                        <a href="{:url('link/edit', array('id'=>$link['id']))}" class="btn btn-primary btn-sm shiny">
                                             <i class="fa fa-edit"></i> 编辑
                                         </a>
-                                        <a href="#" onClick="warning('确实要删除该栏目吗', '{:url(\'cate/del\', array(\'id\'=>$cate[\'id\']))}')"
+                                        <a href="#" onClick="warning('确实要删除该链接吗', '{:url(\'link/del\', array(\'id\'=>$link[\'id\']))}')"
                                            class="btn btn-danger btn-sm shiny">
                                             <i class="fa fa-trash-o"></i> 删除
                                         </a>
@@ -62,8 +58,11 @@
                                 {/volist}
                                 </tbody>
                             </table>
-                            <div style="margin-left: 14%;margin-top: 15px"><input type="submit" class="btn btn-primary" value="排序"></div>
+                            <div style="margin-top: 10px;float: left"><input type="submit" class="btn btn-primary" value="排序"></div>
                             </form>
+                        </div>
+                        <div style="margin-top: 10px; text-align: right">
+                            {$links->render()}
                         </div>
                     </div>
                 </div>

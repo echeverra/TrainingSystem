@@ -1,0 +1,104 @@
+{include file='common/header'}
+{include file='common/menu'}
+
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">系统</a>
+            </li>
+            <li class="active">配置列表</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <button type="button" tooltip="添加配置" class="btn btn-sm btn-azure btn-addon"
+                onClick="javascript:window.location.href = '{:url(\'conf/add\')}'"><i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <form action="" method="post">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                <tr>
+                                    <th class="text-center" style="width: 20%">配置名称</th>
+                                    <th class="text-center">配置值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($confs as $k=>$v): ?>
+                                <tr>
+                                    <td align="center">{$v.cnname}</td>
+                                    <td align="left">
+                                        <?php if($v['type']==1):?>
+                                            <input type="text" class="form-control" value="{$v.value}" name="<?=$v['enname']?>">
+                                        <?php endif;?>
+
+                                        <?php if($v['type']==2):?>
+                                            <textarea type="text" class="form-control" name="<?=$v['enname']?>">{$v.value}</textarea>
+                                        <?php endif;?>
+
+                                        <?php if($v['type']==3):
+                                            if($v['values']) {
+                                                $arr = explode(',', $v['values']);
+                                            }
+                                            foreach($arr as $k1=>$v1):?>
+                                        <label style="margin-right: 15px">
+                                            <input <?php if($v['value'] == $v1) {echo 'checked="checked"';} ?> type="radio" name="<?=$v['enname']?>" value="<?= $v1?>">
+                                            <span class="text"><?= $v1?></span>
+                                        </label>
+                                        <?php endforeach;?>
+                                        <?php endif;?>
+
+                                        <?php if($v['type']==4):?>
+                                        <label>
+                                            <input <?php if($v['values'] == $v['value']) {echo 'checked="checked"';}?> type="checkbox" value="<?= $v['values']?>" name="<?=$v['enname']?>">
+                                            <span class="text">{$v.values}</span>
+                                        </label>
+                                        <?php endif;?>
+
+                                        <?php if($v['type']==5):
+                                            if($v['values']) {
+                                                $arr = explode(',', $v['values']);
+                                            }
+                                            ?>
+                                            <select name="<?=$v['enname']?>" id="" class="form-control">
+                                                <option value="">--请选择--</option>
+                                                <?php foreach($arr as $k2=>$v2): ?>
+                                                <option <?php if($v['value'] == $v2) {echo 'selected';}?> value="<?php echo $v2?>"><?php echo $v2?></option>
+                                                <?php endforeach;?>
+                                            </select>
+
+                                        <?php endif;?>
+                                    </td>
+                                </tr>
+                                <?php endforeach?>
+                                </tbody>
+                            </table>
+                                <div class="form-group" style="margin: 15px">
+                                    <div class="col-sm-offset-10 col-sm-2">
+                                        <button type="submit" class="btn btn-default">修改配置</button>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+
+{include file='common/footer'}
