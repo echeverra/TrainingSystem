@@ -73,9 +73,8 @@ class Cate extends Base
             if(!$validate->scene('edit')->check($data)){
                 $this->error($validate->getError());
             }
-            $res = $cate->update($data);
 
-            if($res || $res==0) {  //等于0为没修改，影响0条
+            if($cate->update($data)) {
                $this->success('修改栏目成功', url('cate/lis'));
             }else {
                 $this->error('修改栏目失败');

@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Admin as AdminModel;
+use app\admin\model\AuthGroup as AuthGroupModel;
 use think\Loader;
 
 class Admin extends Base
@@ -8,9 +9,22 @@ class Admin extends Base
     public function lis()
     {
         $row = 10;
-        $admin = new AdminModel();
-        $adminRes = $admin->paginate($row);
-        $this->assign("adminRes", $adminRes);
+        $adminModel = new AdminModel();
+        $admins = $adminModel->paginate($row);
+
+        $auth = new Auth();
+        foreach($admins as $k=>$v) {
+            $_groupTitle = $auth->getGroups($v['id']);
+            //判断处理没有群组的用户
+            if($_groupTitle) {
+                $groupTitle = $_groupTitle[0]['title'];
+                $v['groupTitle'] = $groupTitle;
+            }else {
+                $v['groupTitle'] = '';
+            }
+
+        }
+        $this->assign("admins", $admins);
         return $this->fetch('lis');
     }
 
@@ -25,24 +39,27 @@ class Admin extends Base
                 $this->error($validate->getError());
             }
 
-            $data['password'] = md5($data['password']);
 
-            $res = $admin->save($data);
-            if($res) {
+            if($admin->addAdmin($data)) {
                 $this->success('添加管理员成功！', 'lis');
             }else {
                 $this->error('添加管理员失败！');
             }
         }
+
+        $authGroupModel = new AuthGroupModel();
+        $authGroups = $authGroupModel->select();
+
+        $this->assign('auth_groups', $authGroups);
         return $this->fetch('add');
     }
 
     public function edit()
     {
-        $admin = new AdminModel();
+        $adminModel = new AdminModel();
         $id = input('id');
-        $adminRes = $admin->find($id); //查询不到NULL
-        if (!$adminRes) {
+        $admin = $adminModel->find($id); //查询不到NULL
+        if (!$admin) {
             $this->error('无法查询到该管理员', url('admin/lis'));
         }
 
@@ -54,21 +71,29 @@ class Admin extends Base
                 $this->error($validate->getError());
             }
 
+            $adminData = [];
+            $adminData['username'] = $data['username'];
+            $adminData['id'] = $data['id'];
+
             if(!$data['password']) {
-                $data['password'] = $adminRes['password']; //没填写密码，取原密码
+                $adminData['password'] = $admin['password']; //没填写密码，取原密码
             }else {
-                $data['password'] = md5($data['password']);
+                $adminData['password'] = md5($data['password']);
             }
 
-            $res = $admin->update($data);
-            if($res || $res==0) {  //等于0为没修改，影响0条
+            $authGroupAccessAddRes = db('auth_group_access')->where('uid', $id)->update(['group_id'=>$data['group_id']]);
+            $adminAddRes = $adminModel->update($adminData);
+
+            if(($adminAddRes !== false) && ($authGroupAccessAddRes !== false) ) {
                $this->success('修改管理员成功', url('admin/lis'));
             }else {
                 $this->error('修改管理员失败');
             }
         }
-
-        $this->assign('admin', $adminRes);
+        $authGroupModel = new AuthGroupModel();
+        $authGroups = $authGroupModel->select();
+        $authGroupAccess = db('auth_group_access')->where('uid', $id)->find();
+        $this->assign(['admin'=>$admin, 'auth_groups'=>$authGroups, 'authGroupAccess'=>$authGroupAccess]);
         return $this->fetch('edit');
     }
 

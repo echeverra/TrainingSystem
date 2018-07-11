@@ -29,15 +29,17 @@
                                 <thead class="">
                                 <tr>
                                     <th class="text-center" style="width: 20%">ID</th>
-                                    <th class="text-center" style="width: 60%">管理员名称</th>
-                                    <th class="text-center" style="width: 40%">操作</th>
+                                    <th class="text-center" style="width: 25%">管理员名称</th>
+                                    <th class="text-center" style="width: 25%">所属群组</th>
+                                    <th class="text-center" style="width: 30%">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {volist name="adminRes" id="admin"}
+                                {volist name="admins" id="admin"}
                                 <tr>
                                     <td align="center">{$admin.id}</td>
                                     <td align="center">{$admin.username}</td>
+                                    <td align="center">{$admin.groupTitle}</td>
                                     <td align="center">
                                         <a href="{:url('admin/edit', array('id'=>$admin['id']))}" class="btn btn-primary btn-sm shiny">
                                             <i class="fa fa-edit"></i> 编辑
@@ -55,7 +57,7 @@
                             </table>
                         </div>
                         <div style="margin-top: 10px; text-align: right">
-                            {$adminRes->render()}
+                            {$admins->render()}
                         </div>
                         <div>
                         </div>

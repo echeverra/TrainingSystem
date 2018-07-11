@@ -67,8 +67,7 @@ class Link extends Base
             if(!$validate->scene('edit')->check($data)){
                 $this->error($validate->getError());
             }
-            $res = $link->update($data);
-            if($res || $res==0) {  //等于0为没修改，影响0条
+            if($link->update($data)) {
                $this->success('修改友情链接成功', url('Link/lis'));
             }else {
                 $this->error('修改友情链接失败');

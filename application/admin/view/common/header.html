@@ -63,17 +63,17 @@
                             </a>
                             <!--Login Area Dropdown-->
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
-                                <li class="username"><a>David Stevenson</a></li>
+                                <li class="username"><a>{$Request.session.username}</a></li>
                                 <li class="dropdown-footer" style="text-align: center">
                                     <a href="{:url('admin/logout')}">
                                         退出登录
                                     </a>
                                 </li>
-                                <li class="dropdown-footer" style="text-align: center">
-                                    <a href="{:url('admin/edit', array('id'=>$Request.session.id))}">
-                                        修改密码
-                                    </a>
-                                </li>
+                                <!--<li class="dropdown-footer" style="text-align: center">-->
+                                    <!--<a href="{:url('admin/edit', array('id'=>$Request.session.id))}">-->
+                                        <!--修改密码-->
+                                    <!--</a>-->
+                                <!--</li>-->
                             </ul>
                             <!--/Login Area Dropdown-->
                         </li>

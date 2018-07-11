@@ -7,6 +7,28 @@ use think\captcha\Captcha;
 class Admin extends Model
 {
 
+    public function addAdmin($data) {
+
+        $adminData = [];
+        $adminData['username'] = $data['username'];
+        $adminData['password'] = md5($data['password']);
+
+        if($this->save($adminData)) {
+
+            $groupAccessData = [];
+            $groupAccessData['uid'] = $this->id;  //save admin后 id会保存在this中
+            $groupAccessData['group_id'] = $data['group_id'];
+
+            if(db('auth_group_access')->insert($groupAccessData)) {
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+
+    }
 
     //管理员登录验证
     public function login($data) {
