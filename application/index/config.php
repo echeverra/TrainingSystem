@@ -14,5 +14,7 @@ return [
         '__INDEX__'=>'/static/index/',
         '__STATIC__'=>'/static/',
         '__LOCALHOST__'=>'http://127.0.0.1',
+        '__SITE_URL__'=>SITE_URL,
+        '__ADMIN__'=>'/static/admin/',
     ]
 ];

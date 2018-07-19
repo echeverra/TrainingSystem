@@ -10,8 +10,46 @@ class Article extends Base
     public function lis() {
         $row = 10;
         $article = new ArticleModel();
+
+        if(request()->isPost()) {
+            $sorts = input('post.');
+            foreach ($sorts as $k=>$v) {
+                if(!is_numeric($v) || intval($v)>100 || intval($v)<1 || !(is_numeric($v)&&!strpos($v, '.'))) {
+                    $this->error('请输入1到100的正整数');
+                }
+            }
+            foreach ($sorts as $k=>$v) {
+                $article->update(['id'=>$k, 'sort'=>$v]);
+            }
+            $this->success('排序成功');
+        }
+
         //联表查询
-        $articles = db('article')->alias('a')->join('cate b', 'a.cateid = b.id')->field('a.*, b.catename')->paginate($row);
+        $articles = db('article')->alias('a')->join('cate b', 'a.cateid = b.id')->order('a.id desc')->field('a.*, b.catename')->paginate($row);
+//        $articles = $article->getArticles();
+        $this->assign('articles', $articles);
+        return $this->fetch('lis');
+    }
+
+    public function filterLis() {
+        $row = 10;
+        $article = new ArticleModel();
+
+        if(request()->isPost()) {
+            $sorts = input('post.');
+            foreach ($sorts as $k=>$v) {
+                if(!is_numeric($v) || intval($v)>100 || intval($v)<1 || !(is_numeric($v)&&!strpos($v, '.'))) {
+                    $this->error('请输入1到100的正整数');
+                }
+            }
+            foreach ($sorts as $k=>$v) {
+                $article->update(['id'=>$k, 'sort'=>$v]);
+            }
+            $this->success('排序成功');
+        }
+
+        //联表查询
+        $articles = db('article')->alias('a')->join('cate b', 'a.cateid = b.id')->where('a.recommend', 1)->order('a.sort asc')->field('a.*, b.catename')->paginate($row);
 //        $articles = $article->getArticles();
         $this->assign('articles', $articles);
         return $this->fetch('lis');
@@ -26,6 +64,8 @@ class Article extends Base
                 'desc' => input('desc'),
                 'cateid' => input('cateid'),
                 'content' => input('content'),
+                'status' => input('status'),
+                'recommend' => input('recommend'),
                 'time' => time(),
             ];
             $article = new ArticleModel();
@@ -56,6 +96,8 @@ class Article extends Base
                 'desc' => input('desc'),
                 'cateid' => input('cateid'),
                 'content' => input('content'),
+                'status' => input('status'),
+                'recommend' => input('recommend'),
                 'time' => time(),
             ];
             $article = new ArticleModel();

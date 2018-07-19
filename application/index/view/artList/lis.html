@@ -1,0 +1,82 @@
+{include file="common/header"}
+
+<body id="list_style_2" class="list_style_2">
+{include file="common/menu"}
+
+<div id="wrapper">
+    <div id="xh_container">
+        <div id="xh_content">
+            {include file="common/position"}
+            <div class="xh_area_h_3" style="margin-top: 40px;">
+                <?php  if(($articles->total()==0)) {?>
+                <h3 style="text-align: center;line-height: 200px">暂无该栏目文章</h3>
+                <?php }?>
+                {volist name="articles" id="article"}
+                <div class="xh_post_h_3 ofh">
+                    <div class="xh">
+                        <a target="_blank" href="{:url('article/article', array('artid'=>$article['id']))}">
+                            <img src="__SITE_URL__{$article.thumb}" alt="{$article.title}" height="240" width="400">
+                        </a>
+                    </div>
+                    <div class="r ofh">
+                        <h2 class="xh_post_h_3_title ofh" style="height:60px;">
+                            <a target="_blank" href="{:url('article/article', array('artid'=>$article['id']))}" title="{$article.title}">{$article.title}</a>
+                        </h2>
+                        <span class="time"><?= date('Y-m-d H:m:s', $article['time']) ?></span>
+                        <div class="xh_post_h_3_entry ofh" style="color:#555;height:80px; overflow:hidden;">
+                            {$article.desc}
+                        </div>
+                        <div class="b">
+                            <a href="{:url('article/article', array('artid'=>$article['id']))}" class="xh_readmore" rel="nofollow">read more</a>
+                            <span class="xh_love">
+                                <span class="textcontainer">
+                                    <span style="color: #999;margin-right: 20px">{$article.like}</span>
+                                </span>
+                            </span>
+                            <span style="color: #999;" class="xh_views">{$article.click}</span>
+                        </div>
+                    </div>
+                </div>
+                {/volist}
+
+                <div style="text-align: right">
+                    <?php if($articles->total()>0) {?>
+                    <div class="pages" style="float: right;line-height: 70px;margin-left: 15px">共
+                        {$articles->lastPage()} 页，{$articles->total()} 条
+                    </div>
+                    <?php }?>
+                    <div style="float: right">
+                        {$articles->render();}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="xh_sidebar">
+            <!-- 右侧 -->
+            <div class="widget">
+                <?php if(!empty($hotArticles)) {?>
+                <div style="background: url('__INDEX__/images/hots_bg.png') no-repeat scroll 0 0 transparent;width:250px;height:52px;margin-bottom:15px;">
+                    <?php }?>
+                </div>
+                <ul id="ulHot">
+                    {volist name="hotArticles" id="hotArticle"}
+                    <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
+                        <div style="float:left;width:85px;height:55px; overflow:hidden;">
+                            <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank">
+                            <img src="__SITE_URL__{$hotArticle.thumb}" width="83" title=""/></a>
+                        </div>
+                        <div style="float:right;width:145px;height:52px; overflow:hidden;">
+                            <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank" title="">{$hotArticle.title}</a>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+{include file="common/footer"}

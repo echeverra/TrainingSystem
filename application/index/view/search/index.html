@@ -1,0 +1,91 @@
+{include file="common/header"}
+
+<body id="list_style_2" class="list_style_2">
+
+{include file="common/menu"}
+
+<div id="wrapper">
+    <div id="xh_container">
+        <div id="xh_content">
+            <div class="path">
+                <a href='__SITE_URL__'>主页</a> >
+                <span>搜索 "{$keywords}" 结果</span> >
+            </div>
+            <div class="clear"></div>
+            <div class="xh_area_h_3" style="margin-top: 40px;">
+                {if condition="$keywords neq ''"}
+                <?php  if(($searchRes->total()==0)) {?>
+                <h3 style="text-align: center;line-height: 200px">暂无搜索结果</h3>
+                <?php }?>
+                {volist name="searchRes" id="search"}
+                <div class="xh_post_h_3 ofh">
+                    <div class="xh">
+                        <a target="_blank" href="{:url('article/article', array('artid'=>$search['id']))}">
+                            <img src="__SITE_URL__{$search.thumb}" alt="{$search.title}" height="240" width="400">
+                        </a>
+                    </div>
+                    <div class="r ofh">
+                        <h2 class="xh_post_h_3_title ofh" style="height:60px;">
+                            <a target="_blank" href="{:url('article/article', array('artid'=>$search['id']))}" title="{$search.title}">{$search.title}</a>
+                        </h2>
+                        <span class="time"><?= date('Y-m-d H:m:s', $search['time']) ?></span>
+                        <div class="xh_post_h_3_entry ofh" style="color:#555;height:80px; overflow:hidden;">
+                            {$search.desc}
+                        </div>
+                        <div class="b">
+                            <a href="{:url('article/article', array('artid'=>$search['id']))}" class="xh_readmore" rel="nofollow">read more</a>
+                            <span class="xh_love">
+                                <span class="textcontainer">
+                                    <span style="color: #999;margin-right: 20px">{$search.like}</span>
+                                </span>
+                            </span>
+                            <span style="color: #999;" class="xh_views">{$search.click}</span>
+                        </div>
+                    </div>
+                </div>
+                {/volist}
+                <div style="text-align: right">
+                    <?php if($searchRes->total()>0) {?>
+                    <div class="pages" style="float: right;line-height: 70px;margin-left: 15px">共
+                        {$searchRes->lastPage()} 页，{$searchRes->total()} 条
+                    </div>
+                    <?php }?>
+                    <div style="float: right">
+                        {$searchRes->render();}
+                    </div>
+                </div>
+                {else}
+                <h3 style="text-align: center;line-height: 200px">搜索关键词不能为空</h3>
+                {/if}
+            </div>
+        </div>
+        <div id="xh_sidebar">
+            <!-- 右侧 -->
+            <div class="widget">
+                <?php if(!empty($hotIndexArticles)) {?>
+                <div style="background: url('__INDEX__/images/hots_bg.png') no-repeat scroll 0 0 transparent;width:250px;height:52px;margin-bottom:15px;">
+                    <?php }?>
+                </div>
+                <ul id="ulHot">
+                    {volist name="hotIndexArticles" id="hotIndexArticle"}
+                    <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
+                        <div style="float:left;width:85px;height:55px; overflow:hidden;">
+                            <a href="{:url('article/article', array('artid'=>$hotIndexArticle['id']))}" target="_blank">
+                                <img src="__SITE_URL__{$hotIndexArticle.thumb}" width="83" title=""/>
+                            </a>
+                        </div>
+                        <div style="float:right;width:145px;height:52px; overflow:hidden;">
+                            <a href="{:url('article/article', array('artid'=>$hotIndexArticle['id']))}" target="_blank" title="">{$hotIndexArticle.title}</a>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+{include file="common/footer"}

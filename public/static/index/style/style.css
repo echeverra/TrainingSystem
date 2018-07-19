@@ -30,7 +30,7 @@ body.page_login{}
 #header_wrap{position:relative;z-index:1;height:70px;background:#353535;width:100%;min-width:1180px;}
 #header{position:relative;width:1180px;height:65px;margin:0 auto;}
 #header h1{width:310px;}
-#header h1 a{overflow:hidden;display:block;float:left;width:185px;height:65px;line-height:65px;text-indent:-9999px;font-size:24px;color:#fff;background:url(../images/logo.png) no-repeat 0 0;}
+#header h1 a{overflow:hidden;display:block;float:left;width:210px;height:65px;line-height:65px;text-indent:-9999px;font-size:24px;color:#fff;background:url(../images/logo.png) no-repeat 0 0;}
 #header h1 a.header_logo{}
 .page_login #header_wrap{z-index:3;position:absolute;top:0;left:0;}
 /* #navi */
@@ -536,7 +536,7 @@ New: xh_
 
 /******** HOME ********/
 /* xh_h_show */
-.xh_h_show{width:100%;height:430px;padding:40px 0;background:#DEDEDE;}
+.xh_h_show{width:100%;height:500px;padding:20px 0;background:#DEDEDE;}
 .xh_h_show_in{width:1180px;margin:0 auto;}
 #zSlider{float:left;position:relative;z-index:0;width:880px;background:#eee;}
 #zSlider li{list-style:none;}
@@ -582,13 +582,13 @@ New: xh_
 .xh_post_h_2 .xh_post_h_2_title a{color:#fff;}
 
 .xh_area_h_3{margin-right:10px;}
-.xh_area_h_3 .xh_area_title{background:url(../images/xh_area_title_h3.png) no-repeat 0 0;}
+.xh_area_h_3 .xh_area_title{background:url(../images/xh_area_title_h3.png) no-repeat 15px 5px;}
 .xh_post_h_3{position:relative;height:340px;margin-bottom:40px;padding-right:10px;border-bottom:1px solid #ccc;}
 .xh_post_h_3 .r{position:absolute;right:10px;top:0;width:300px;height:270px;padding:15px;}
 .xh_post_h_3 .xh_post_h_3_title{line-height:32px;font-weight:bold;font-size:20px;color:#333;}
 .xh_post_h_3 .xh_post_h_3_title a{color:#333;}
 .xh_post_h_3 .xh_post_h_3_title a:hover{color:#c40000;}
-.xh_post_h_3 .time{display:block;height:30px;line-height:30px;margin-bottom:20px;color:#777;}
+.xh_post_h_3 .time{display:block;height:30px;line-height:30px;margin-bottom:10px;color:#777;}
 .xh_post_h_3 .xh_post_h_3_entry{height:125px;line-height:25px;}
 .xh_post_h_3 .cat{position:absolute;left:0;bottom:40px;padding:0 15px;height:26px;line-height:26px;font-size:11px;font-family:"Microsoft Yahei";background:#000;opacity:0.7;filter:alpha(opacity=70);}
 .xh_post_h_3 .cat:hover{background:#009FEB;}
@@ -639,7 +639,7 @@ New: xh_
 #xh_sidebar .hot_week p a:hover{text-decoration:underline;}
 #xh_sidebar .links{padding-right:0;}
 #xh_sidebar .links h3{text-indent:-9999px;background:url(../images/links_bg.png) no-repeat 0 0;height:67px;}
-#xh_sidebar .links ul li{float:left;overflow:hidden;width:115px;height:18px;padding-right:10px;border-bottom:1px solid #e5e5e5;}
+#xh_sidebar .links ul li{float:left;overflow:hidden;width:115px;height:26px;padding-right:10px;border-bottom:1px solid #e5e5e5;}
 #xh_sidebar .links p{padding:5px 18px 0;text-align:right;}
 #xh_sidebar .links p a{color:#963;}
 #xh_sidebar .links p a:hover{text-decoration:underline;}
@@ -1095,3 +1095,6 @@ a.larger:hover {
         z-index: 1002; left: 0px;  
         opacity:0.5; -moz-opacity:0.5;  
     }
+.xh_post_h_3 .ofh {
+    height: 60px;
+}

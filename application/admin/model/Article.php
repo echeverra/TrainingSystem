@@ -9,6 +9,7 @@ class Article extends Model
     protected static function init()
     {
         Article::event('before_insert', function ($article) {
+            //保存图片处理
             if($_FILES['thumb']['name']) {
                 $file = request()->file('thumb');
                 if($file) {
@@ -23,6 +24,9 @@ class Article extends Model
         });
 
         Article::event('before_update', function ($article) {
+            if(!isset($articleRes['thumb'])) {  //不修改图片的更新
+                return;
+            }
             if($_FILES['thumb']['name']) {
                 $articleRes=Article::find($article->id);
                 $thumbPath = $_SERVER['DOCUMENT_ROOT'] . $articleRes['thumb'];

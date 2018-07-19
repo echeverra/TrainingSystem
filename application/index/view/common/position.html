@@ -1,0 +1,10 @@
+
+<div class="path">
+    <a href='__SITE_URL__'>主页</a> >
+    {volist name="parentsCates" id="parentsCate"}
+    <a href="__SITE_URL__index/{if condition="$parentsCate['type'] eq 1"}artlist/lis/cateid/{$parentsCate.id}
+    {elseif condition="$parentsCate['type'] eq 2"}article/article/cateid/{$parentsCate.id}
+    {elseif condition="$parentsCate['type'] eq 3"}imglist/lis/cateid/{$parentsCate.id}{/if}">{$parentsCate.catename}</a> >
+    {/volist}
+</div>
+<div class="clear"></div>

@@ -19,21 +19,30 @@
 
         <button type="button" tooltip="添加文章" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url(\'article/add\')}'"> <i class="fa fa-plus"></i> Add
         </button>
+        <button style="float: right" type="button" tooltip="全部文章" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url(\'article/lis\')}'"> 全部文章
+        </button>
+        <button style="float: right;margin-right: 15px" type="button" tooltip="筛选推荐位" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url(\'article/filterLis\')}'"> 筛选推荐位
+        </button>
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
                 <div class="widget">
                     <div class="widget-body">
                         <div class="flip-scroll">
+                            <form action="" method="post">
                             <table class="table table-bordered table-hover">
                                 <thead class="">
                                 <tr>
                                     <th class="text-center" width="3%">ID</th>
+                                    <th class="text-center" width="3%">排序</th>
                                     <th class="text-center" width="5%">文章标题</th>
-                                    <th class="text-center" width="5%">关键字</th>
-                                    <th class="text-center" width="5%">描述缩略图</th>
-                                    <th class="text-center" width="10%">文章内容</th>
-                                    <th class="text-center" width="5%">类别</th>
-                                    <th class="text-center" width="5%">文章发布时间</th>
+                                    <th class="text-center" width="3%">关键字</th>
+                                    <th class="text-center" width="3%">缩略图</th>
+                                    <th class="text-center" width="5%">描述</th>
+                                    <!--<th class="text-center" width="10%">文章内容</th>-->
+                                    <th class="text-center" width="3%">类别</th>
+                                    <th class="text-center" width="3%">是否发布</th>
+                                    <th class="text-center" width="3%">是否推荐</th>
+                                    <th class="text-center" width="3%">文章发布时间</th>
                                     <th class="text-center" width="5%">操作</th>
                                 </tr>
                                 </thead>
@@ -41,6 +50,7 @@
                                 {volist name="articles" id="article"}
                                 <tr>
                                     <td align="center">{$article.id}</td>
+                                    <td align="center"><input style="width: 50px; text-align: center" type="text" name="{$article.id}" value="{$article.sort}" required="required" maxlength="3"></td>
                                     <td align="center"><?= mb_substr($article['title'], 0, 6, 'utf-8'); if(strlen($article['title'])>6) {echo '...';}; ?></td>
                                     <td align="center">{$article.keywords}</td>
                                     <td align="center">
@@ -50,8 +60,23 @@
                                         <img src="__SITE_URL__{$article.thumb}" alt="" style="height: 30px">
                                         {/if}
                                     </td>
-                                    <td align="center"><?= mb_substr($article['content'], 0, 20, 'utf-8'); if(strlen($article['content'])>20) {echo '...';}; ?></td>
+                                    <!--<td align="center"><?= mb_substr($article['content'], 0, 20, 'utf-8'); if(strlen($article['content'])>20) {echo '...';}; ?></td>-->
+                                    <td align="center"><?= mb_substr($article['desc'], 0, 10, 'utf-8'); if(strlen($article['desc'])>20) {echo '...';}; ?></td>
                                     <td align="center">{$article.catename}</td>
+                                    <td align="center">
+                                        {if condition="$article['status'] eq 1"}
+                                        是
+                                        {else}
+                                        否
+                                        {/if}
+                                    </td>
+                                    <td align="center">
+                                        {if condition="$article['recommend'] eq 1"}
+                                        是
+                                        {else}
+                                        否
+                                        {/if}
+                                    </td>
                                     <td align="center"><?= date('Y-m-d H:m:s', $article['time']) ?></td>
                                     <td align="center">
                                         <a href="{:url('article/edit', array('id'=>$article['id']))}" class="btn btn-primary btn-sm shiny">
@@ -65,6 +90,9 @@
                                 {/volist}
                                 </tbody>
                             </table>
+                                <div style="margin-top: 10px;float: left"><input type="submit" class="btn btn-primary" value="排序"></div>
+                                <div class="clear"></div>
+                            </form>
                         </div>
                         <div style="margin-top: 10px; text-align: right">
                             {$articles->render()}

@@ -1,0 +1,202 @@
+{include file="common/header"}
+
+<style>
+    body {
+        background-image: none;
+        background-color: #dedede;
+        color: #999999;
+        font-family: "Microsoft Yahei", "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        height: 100%;
+        text-align: left;
+        width: 100%;
+    }
+
+    #xh_container {
+        background-color: #dedede;
+        /*margin-top: 36px;*/
+        width: 1098px;
+    }
+
+    #wrapper {
+        background-color: #dedede;
+    }
+
+    #l-nav {
+        background-image: url('/blog4__INDEX__/style/simg/look-bike-nav-bg.png');
+        width: 188px;
+        height: 360px;
+        float: left;
+    }
+
+    #l-nav a {
+        font-size: 14px;
+        color: #000000;
+    }
+
+    #l-nav a:hover {
+        font-size: 14px;
+        color: #999999;
+    }
+
+    #l-nav div {
+        padding-left: 20px;
+    }
+
+    #l-nav .l-nav-word {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    #l-focus {
+        float: right;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    div {
+        color: #666666;
+    }
+
+    #menu-item-196 a.a, #menu-item-198 a.a, #menu-item-197 a.a {
+        color: #00BBEE;
+    }
+
+    #menu-item-198 {
+        background-image: url('__INDEX__/images/up-arrow.png');
+        background-position: center bottom;
+        background-repeat: no-repeat;
+    }
+
+    .boxBor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        z-index: 9999;
+        background-color: #ffffff;
+        opacity: 0.3;
+        filter: alpha(opacity=30)
+    }
+    .imgList-title {
+        height: 45px;
+        overflow: hidden;
+        display: block;
+        line-height: 1.5;
+        width: 320px;
+    }
+
+</style>
+
+<body id="list_style_2" class="list_style_2">
+
+{include file="common/menu"}
+
+<div id="wrapper">
+
+
+    <div id="xh_container">
+
+        {include file="common/position"}
+
+        <div class="xh_265x265x00">
+            {volist name="articles" id="article"}
+            <div style="float: left; width: 343px; height: 293px; background-color: #ffffff; border: solid 1px #ccc; margin-left: 15px;margin-top: 15px;">
+                <div style="background-color: #cccccc; width: 313px; height: 188px; margin-top: 16px;
+                    margin-left: 14px;">
+                    <a target="_blank" href="{:url('article/article', array('artid'=>$article['id']))}">
+                        <img src="__SITE_URL__{$article.thumb}" alt="" height="188" width="313">
+                    </a>
+                </div>
+                <div style="margin-left: 14px; line-height: 25px; margin-top: 10px;">
+                    <div style="font-size: 12px;color:#cccccc;"><?= date('Y-m-d H:m:s', $article['time']) ?></div>
+                    <div style="font-size: 14px;height:45px;">
+                        <a target="_blank" class="imgList-title" href="{:url('article/article', array('artid'=>$article['id']))}">{$article.title}</a>
+                    </div>
+
+                </div>
+            </div>
+            {/volist}
+
+
+            <div style="clear: both;"></div>
+
+
+            <div style="text-align: right">
+                <!--<div class="pages" style="float: right;line-height: 70px;margin-left: 15px">共 3 页，36条</div>-->
+                <div style="float: right">
+                    {$articles->render();}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript">
+        $("#menu-item-198").find("a").addClass("a");
+        $(".i-prev").hover(function () {
+            $(this).addClass("i-prev-o");
+        }, function () {
+            $(this).removeClass("i-prev-o");
+        });
+        $(".i-next").hover(function () {
+            $(this).addClass("i-next-o");
+        }, function () {
+            $(this).removeClass("i-next-o");
+        });
+        $(".more0").hover(function () {
+            $(this).attr("src", "__INDEX__/style/simg/more-o.png");
+        }, function () {
+            $(this).attr("src", "__INDEX__/style/simg/more.png");
+        });
+    </script>
+    <div class="boxBor"></div>
+
+    <input type="hidden" id="hdBoxbor"/>
+    <div class="boxBor" onclick="IBoxBor()" style="cursor:pointer;"></div>
+
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        var imgHoverSetTimeOut = null;
+        $('.xh_265x265x00 img').hover(function () {
+            var oPosition = $(this).offset();
+            var oThis = $(this);
+            $(".boxBor").css({
+                left: oPosition.left,
+                top: oPosition.top,
+                width: oThis.width(),
+                height: oThis.height()
+            });
+            $(".boxBor").show();
+            var urlText = $(this).parent().attr("href");
+            $("#hdBoxbor").val(urlText);
+        }, function () {
+            imgHoverSetTimeOut = setTimeout(function () {
+                $(".boxBor").hide();
+            }, 500);
+        });
+        $(".boxBor").hover(
+            function () {
+                clearTimeout(imgHoverSetTimeOut);
+            }
+            , function () {
+                $(".boxBor").hide();
+            }
+        );
+    });
+
+    function IBoxBor() {
+        window.open($("#hdBoxbor").val());
+    }
+
+    function goanewurl() {
+        window.open($("#hdUrlFocus").val());
+    }
+</script>
+
+
+{include file="common/footer"}

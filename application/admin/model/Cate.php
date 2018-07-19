@@ -53,4 +53,5 @@ class Cate extends Model
         return $arr;
     }
 
+
 }
