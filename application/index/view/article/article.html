@@ -28,7 +28,7 @@
 <div id="wrapper">
         <div id="container">
             <div id="content">
-                <div class="post" id="post-19563" style="border-right: solid 1px #000000; min-height: 1700px;
+                <div class="post" id="post-19563" style="border-right: solid 1px #000000;
                     margin-top: 10px;">
                     {include file="common/position"}
                     <div class="single_entry single2_entry">
@@ -83,40 +83,10 @@
                             </div>
                             <div class="clear">
                             </div>
-                            <div id="ctl00_ctl00_ContentPlaceHolder1_contentPlace_divRead">
-                                <div style="text-align: left; width: 100%; border-bottom: solid 1px #e0e0e0; padding-bottom: 4px;
-                                    color: Black; vertical-align: middle; font-weight: bold;">
-                                    &nbsp;&nbsp;热门文章推荐
-                                </div>
-                                <ul class="read" style="list-style-type: none; margin-top: 10px; width: 780px;">
-                                    {volist name="hotArticles" id="hotArticle"}
-                                    <li style="margin-left: -10px; margin-right: 16px; margin-top: 20px; height: 180px;">
-                                        <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank"><img src="__SITE_URL__{$hotArticle.thumb}" style="width: 150px; height: 100px; margin-bottom: 0px;"/>
-                                            <div style="margin: 0px; padding: 0px; margin-top: -5px;">{$hotArticle.title}</div></a>
-                                    </li>
-                                    {/volist}
-                                </ul>
-                            </div>
                             <div class="clear">
                             </div>
                             <div class="comments_wrap" style="margin-top: 35px;">
                                 <a name="comment"></a>
-                                <!-- Duoshuo Comment BEGIN -->
-                                <div class="ds-thread" data-thread-key=""
-                                     data-title="" data-author-key="" data-url=""></div>
-                                <script type="text/javascript">
-                                    var duoshuoQuery = {short_name: "dede58"};
-                                    (function () {
-                                        var ds = document.createElement('script');
-                                        ds.type = 'text/javascript';
-                                        ds.async = true;
-                                        ds.src = 'http://static.duoshuo.com/embed.js';
-                                        ds.charset = 'UTF-8';
-                                        (document.getElementsByTagName('head')[0]
-                                            || document.getElementsByTagName('body')[0]).appendChild(ds);
-                                    })();
-                                </script>
-                                <!-- Duoshuo Comment END -->
                             </div>
                             <div class="clear">
                             </div>
@@ -135,8 +105,18 @@
                     <ul id="ulHot">
                         {volist name="hotArticles" id="hotArticle"}
                         <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
-                            <div style="float:left;width:85px;height:55px; overflow:hidden;"><a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank"><img src="__SITE_URL__{$hotArticle.thumb}" width="83" title="" /></a></div>
-                            <div style="float:left;width:140px;height:52px; overflow:hidden;margin-left: 10px"><a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank" title="">{$hotArticle.title}</a></div>
+                            <div style="float:left;width:85px;height:55px; overflow:hidden;"><a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank">
+                                <?php if($hotArticle['thumb']) {?>
+                                <img src="__SITE_URL__{$hotArticle.thumb}" style="width: 84px;height: 55px">
+                                <?php }else {?>
+                                <img src="__INDEX__/images/default.jpg" style="width: 84px;height: 55px">
+                                <?php }?>
+                            </a></div>
+                            <div style="float:left;width:140px;height:52px; overflow:hidden;margin-left: 10px">
+                                <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank" title="">
+                                {$hotArticle.title}
+                                </a>
+                            </div>
                         </li>
                     {/volist}
                     </ul>
@@ -148,8 +128,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="__INDEX__/style/z700bike_global.js"></script>
-    <script type="text/javascript" src="__INDEX__/style/z700bike_single.js"></script>
 
 </div>
 

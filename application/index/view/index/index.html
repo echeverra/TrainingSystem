@@ -25,8 +25,9 @@
     .banner-title {
         position: absolute;
         width: 600px;
-        height: 60px;
-        padding-top: 8px;
+        height: 40px;
+        padding-top: 10px;
+        line-height: 1.5;
         overflow: hidden;
         left: 0;
         bottom: 0;
@@ -73,7 +74,11 @@
                     {volist name="recommendArticles" id="recommendArticle"}
                     <div class="swiper-slide">
                         <a href="{:url('article/article', array('artid'=>$recommendArticle['id']))}">
-                        <img src="__SITE_URL__{$recommendArticle.thumb}">
+                            <?php if($recommendArticle['thumb']) {?>
+                            <img onclick="articleJump({$recommendArticle.id})" src="__SITE_URL__{$recommendArticle.thumb}">
+                            <?php }else {?>
+                            <img onclick="articleJump({$recommendArticle.id})" src="__INDEX__/images/default.jpg">
+                            <?php }?>
                         <span class="banner-title">{$recommendArticle.title}</span>
                         </a>
                     </div>
@@ -89,13 +94,18 @@
                 <!--<div class="swiper-scrollbar"></div>-->
             </div>
 
-            <!--<div id="picshow_right">-->
+            <div id="picshow_right" style="width: 340px;height: 480px;background: #fff">
+                <!--<h2>终极三问之:</h2>-->
+                <!--<p>1.我是谁？</p>-->
+                <!--<p>2.我在哪儿？</p>-->
+                <!--<p>3.我在干什么</p>-->
+                <img style="width: 340px;height: 480px" src="__INDEX__/images/mi.jpg" alt="">
       <!--<a href="/life/416.html" target="_blank">-->
     <!--<img src="__INDEX__/images/1-140206160415Y6.jpg" alt="COACH再度携手王力宏 踩单车演" width="255px" height="420px"></a>-->
    <!---->
             <!--<div id="picshow_right_cover" onclick="goanewurl()" style="cursor:pointer;position:absolute;top:495px;font-size:14px;width:213px;height:45px;line-height:45px;padding-left:42px;color:#ffffff;zoom:1;background-image:url(__INDEX__/images/focus-left-bg.png); background-repeat:no-repeat; background-color:#01A1ED;"></div>-->
             <!--</div>-->
-        <!--</div>-->
+        </div>
     <div class="clear"></div>
     </div>
     </div>
@@ -121,7 +131,11 @@
                 <div class="xh_post_h_3 ofh">
                     <div class="xh_265x265">
                         <a target="_blank" href="{:url('article/article', array('artid'=>$newArticle['id']))}">
+                            <?php if($newArticle['thumb']) {?>
                             <img src="__SITE_URL__{$newArticle.thumb}" alt="" height="240" width="400">
+                            <?php }else {?>
+                            <img src="__INDEX__/images/default.jpg" alt="" height="240" width="400">
+                            <?php }?>
                         </a>
                     </div>
                     <div class="r ofh">
@@ -162,8 +176,12 @@
                  {volist name="hotIndexArticles" id="hotIndexArticle"}
                  <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
                      <div style="float:left;width:85px;height:55px; overflow:hidden;">
-                         <a href="{:url('article/article', array('artid'=>$hotIndexArticle['id']))}"
-                             target="_blank"><img src="__SITE_URL__{$hotIndexArticle.thumb}" width="83"/>
+                         <a href="{:url('article/article', array('artid'=>$hotIndexArticle['id']))}" target="_blank">
+                             <?php if($hotIndexArticle['thumb']) {?>
+                             <img src="__SITE_URL__{$hotIndexArticle.thumb}" style="width: 84px;height: 55px"/>
+                             <?php }else {?>
+                             <img src="__INDEX__/images/default.jpg" style="width: 84px;height: 55px"/>
+                             <?php }?>
                          </a>
                      </div>
                      <div style="float:right;width:145px;height:52px; overflow:hidden;">
@@ -196,6 +214,9 @@
 
 <script type="text/javascript">
 
+    function articleJump(artid) {
+        window.open('__SITE_URL__/index/article/article/artid/'+artid);
+    }
 
     $(function () {
 

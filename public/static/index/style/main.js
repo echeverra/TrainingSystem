@@ -1,9 +1,9 @@
 
 //无文章时撑开整个屏幕
-if($(window).height()>$('html').height()) {
+if($(window).height()>$('body').height()) {
     var headH = $('#header_wrap').outerHeight();
     var footH = $('#footer_wrap').outerHeight();
-    $('#xh_container').height($(window).height()-40-headH-footH + 'px');  //40为xh_container设置的margin值
+    $('#xh_container').height($(window).height()-50-headH-footH + 'px');
 }
 
 //navi

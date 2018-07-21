@@ -14,7 +14,7 @@ class Base extends Controller
         }
         if(input('artid')) {
             $article = db('article')->where('id', input('artid'))->find();
-            $cateid = $article['id'];
+            $cateid = $article['cateid'];
             $this->getPosition($cateid);
         }
         //网站配置项

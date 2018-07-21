@@ -15,7 +15,11 @@
                 <div class="xh_post_h_3 ofh">
                     <div class="xh">
                         <a target="_blank" href="{:url('article/article', array('artid'=>$article['id']))}">
-                            <img src="__SITE_URL__{$article.thumb}" alt="{$article.title}" height="240" width="400">
+                            <?php if($article['thumb']) {?>
+                            <img src="__SITE_URL__{$article.thumb}" alt="" height="240" width="400">
+                            <?php }else {?>
+                            <img src="__INDEX__/images/default.jpg" alt="" height="240" width="400">
+                            <?php }?>
                         </a>
                     </div>
                     <div class="r ofh">
@@ -63,7 +67,12 @@
                     <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
                         <div style="float:left;width:85px;height:55px; overflow:hidden;">
                             <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank">
-                            <img src="__SITE_URL__{$hotArticle.thumb}" width="83" title=""/></a>
+                                <?php if($hotArticle['thumb']) {?>
+                                <img src="__SITE_URL__{$hotArticle.thumb}" style="width: 84px;height: 55px"/>
+                                <?php }else {?>
+                                <img src="__INDEX__/images/default.jpg" style="width: 84px;height: 55px"/>
+                                <?php }?>
+                            </a>
                         </div>
                         <div style="float:right;width:145px;height:52px; overflow:hidden;">
                             <a href="{:url('article/article', array('artid'=>$hotArticle['id']))}" target="_blank" title="">{$hotArticle.title}</a>

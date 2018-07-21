@@ -7,7 +7,6 @@ class Index extends Base
 {
     public function index()
     {
-
         $articleModel = new ArticleModel();
         $newArticles =  $articleModel->getNewArticles(10);
         $hotIndexArticles = $articleModel->getIndexHotArticles(5);
